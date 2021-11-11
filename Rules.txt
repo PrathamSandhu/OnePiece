@@ -1,0 +1,17 @@
+*creating the background.
+*making the pc
+	move up and down.
+	fire cannon balls.
+	it will start with a total of 15 poits of helth
+	if it hits:-
+		shipreck - 2 points
+		enemy pirate ship - 5 points
+		navy war ship - 7 points
+		cannon ball - 1 points
+	when the points go down to 0 it is game over.
+	the ship will be a body/sprite
+	cannon ball is also a body
+
+
+	
+ 
