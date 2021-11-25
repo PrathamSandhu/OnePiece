@@ -1,3 +1,5 @@
+var reload = 25
+
 function preload(){
   bgImage =loadImage("Image/bg.jpg");
   PirateShipImage = loadImage("Image/PirateShip.png");
@@ -5,30 +7,55 @@ function preload(){
 
 function setup() {
   createCanvas(windowWidth,windowHeight);
-  bg1 = createSprite(windowWidth/2, windowHeight/2, windowWidth, windowHeight);
-  bg1.addImage(bgImage);
-  bg1.scale = 1.3;
-  bg1.debug = true;
-
-  bg2 = createSprite(windowWidth + windowWidth/2, windowHeight/2, windowWidth, windowHeight);
-  bg2.addImage(bgImage);
-  bg2.scale = 1.3;
-  bg2.debug = true;
+  ground = createSprite(width/2,height/2,width,2);
+  ground.addImage(bgImage);
+  ground.scale = 2;
 
   ps = createSprite(250, windowHeight/2, 50, 50);
   ps.addImage(PirateShipImage);
   ps.scale = 0.5;
+
+
+  /*
+
+  for( var i = reload; i >= 0 ; i=i-1){
+
+     cannonBall = new CannonBalls(ps.x, ps.y);
+
+
+  }
+
+
+
+  */
+  cannonBall = new CannonBalls(ps.x, ps.y);
 }
 
 function draw() {
   background(255);
-  bg1.velocityX = -5;
-  bg2.velocityX = -5; 
+  ground.velocityX = -2; 
 
-  if(bg1<0){
-    bg1.X = windowWidth;
+  if (ground.x < windowWidth/4){ 
+    ground.x = windowWidth/2; 
   }
-  
-
   drawSprites();
+  cannonBall.display();
 }
+
+function keyPressed(){
+  if(keyCode === UP_ARROW){
+    ps.y -= 10;
+    cannonBall.y -= 10;
+  }
+  if(keyCode === DOWN_ARROW){
+    ps.y += 10;
+    cannonBall.y += 10;
+  }
+}
+
+function keyReleased(){
+  if(keyCode === 32){
+    cannonBall.x = cannonBall.x+2;
+  }
+}
+
