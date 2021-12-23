@@ -26,6 +26,8 @@ function setup() {
   ps = createSprite(250, windowHeight/2, 50, 50);
   ps.addImage(PirateShipImage);
   ps.scale = 0.5;
+
+  warShip = new WarShip(400,windowHeight/4, 10, 10, 400);
      
   
 
