@@ -1,4 +1,13 @@
-var reload = 25
+const Engine = Matter.Engine;
+const World = Matter.World;
+const Bodies = Matter.Bodies;
+const Constraint = Matter.Constraint;
+
+var ballC = [];
+
+var reload = 25;
+
+var cannonBall;
 
 function preload(){
   bgImage =loadImage("Image/bg.jpg");
@@ -7,6 +16,9 @@ function preload(){
 
 function setup() {
   createCanvas(windowWidth,windowHeight);
+  engine = Engine.create();
+  world = engine.world
+
   ground = createSprite(width/2,height/2,width,2);
   ground.addImage(bgImage);
   ground.scale = 2;
@@ -14,48 +26,57 @@ function setup() {
   ps = createSprite(250, windowHeight/2, 50, 50);
   ps.addImage(PirateShipImage);
   ps.scale = 0.5;
+     
+  
 
-
-  /*
-
-  for( var i = reload; i >= 0 ; i=i-1){
-
-     cannonBall = new CannonBalls(ps.x, ps.y);
-
-
-  }
-
-
-
-  */
-  cannonBall = new CannonBalls(ps.x, ps.y);
 }
 
 function draw() {
   background(255);
+  Engine.update(engine);
   ground.velocityX = -2; 
 
   if (ground.x < windowWidth/4){ 
     ground.x = windowWidth/2; 
   }
   drawSprites();
-  cannonBall.display();
+  
+ 
+  //cannonBall.display();
+
+  for (var i = 0; i < ballC.length; i++) {
+    showCannonBalls(ballC[i]);
+  }
+
+
+
 }
 
-function keyPressed(){
-  if(keyCode === UP_ARROW){
-    ps.y -= 10;
-    cannonBall.y -= 10;
-  }
-  if(keyCode === DOWN_ARROW){
-    ps.y += 10;
-    cannonBall.y += 10;
+
+
+function keyPressed() {
+  if (keyCode === 32) {
+
+   
+
+    var ball = new CannonBalls(ps.x, ps.y);
+    ball.trajectory = [];
+    ballC.push(ball);
+    console.log("Trace1");
+    
+    
   }
 }
 
-function keyReleased(){
-  if(keyCode === 32){
-    cannonBall.x = cannonBall.x+2;
+function showCannonBalls(ballC) {
+  if (ballC) {
+    ballC.display();
+  }
+}
+
+function keyReleased() {
+  if (keyCode === 32) {
+    ballC[ballC.length - 1].shoot();
   }
 }
 

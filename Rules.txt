@@ -11,6 +11,7 @@
 	when the points go down to 0 it is game over.
 	the ship will be a body/sprite
 	cannon ball is also a body
+	keyDown space bar fires cannon balls
 
 
 	
